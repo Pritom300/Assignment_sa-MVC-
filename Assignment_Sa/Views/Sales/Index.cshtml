@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Assignment_Sa.Models.SaleMaster>
+@{
+    ViewData["Title"] = "Sales List";
+}
+
+<h2>Sales List</h2>
+
+
+
+<form method="get" asp-action="Index" class="row mb-3">
+    <div class="col-md-3">
+        <label>Customer</label>
+        <input type="text" name="searchCustomer" value="@Context.Request.Query["searchCustomer"]" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label>From Date</label>
+        <input type="date" name="fromDate" value="@Context.Request.Query["fromDate"]" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label>To Date</label>
+        <input type="date" name="toDate" value="@Context.Request.Query["toDate"]" class="form-control" />
+    </div>
+    <div class="col-md-3" style="margin-top:25px;">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a asp-action="Index" class="btn btn-secondary">Reset</a>
+    </div>
+</form>
+
+<a asp-action="ExportToExcel" class="btn btn-info mb-3">Export to Excel</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Sale Date</th>
+            <th>Total Amount</th>
+            <th>Sold By</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var sale in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@sale.Customer?.Name</td>
+                    <td>@sale.SaleDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@sale.TotalAmount.ToString("C")</td>
+                    <td>@sale.CreatedByUser.Username</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@sale.SaleId" class="btn btn-sm btn-primary">View</a>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No sales found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

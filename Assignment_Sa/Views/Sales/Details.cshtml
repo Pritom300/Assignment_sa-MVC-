@@ -1,0 +1,37 @@
+﻿@model Assignment_Sa.Models.SaleMaster
+@{
+    ViewData["Title"] = "Sale Details";
+}
+
+<h2>Sale Details</h2>
+
+<p><strong>Customer:</strong> @Model.Customer?.Name</p>
+<p><strong>Sale Date:</strong> @Model.SaleDate.ToString("yyyy-MM-dd HH:mm")</p>
+<p><strong>Total Amount:</strong> @Model.TotalAmount.ToString("C")</p>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.SalesDetails)
+        {
+            <tr>
+                <td>@detail.Product?.Name</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.UnitPrice.ToString("C")</td>
+                <td>@detail.SubTotal.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Invoice" asp-route-id="@Model.SaleId" class="btn btn-primary">Generate PDF</a>
+
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

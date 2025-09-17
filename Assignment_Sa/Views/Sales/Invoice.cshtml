@@ -1,0 +1,36 @@
+﻿@model Assignment_Sa.Models.SaleMaster
+@{
+    Layout = null; // so PDF is clean, no layout
+}
+
+<h2 style="text-align:center;">Invoice</h2>
+<p><strong>Customer:</strong> @Model.Customer?.Name</p>
+<p><strong>Date:</strong> @Model.SaleDate.ToString("yyyy-MM-dd HH:mm")</p>
+<p><strong>Total Amount:</strong> @Model.TotalAmount.ToString("C")</p>
+
+<table border="1" cellspacing="0" cellpadding="5" style="width:100%; border-collapse:collapse;">
+    <thead style="background:#f2f2f2;">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.SalesDetails)
+        {
+            <tr>
+                <td>@detail.Product?.Name</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.UnitPrice.ToString("C")</td>
+                <td>@detail.SubTotal.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p style="text-align:right; margin-top:20px;">
+    <strong>Grand Total:</strong> @Model.TotalAmount.ToString("C")
+</p>
+
