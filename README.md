@@ -19,7 +19,7 @@ Sample Products
    Update-Database              (For Visual Studio)
 
 3. dotnet ef migrations add InitialCreate   (Visual Studio Code)
-   Update-Database
+   Update-Database                          (Visual Studio Code)
 
 4. Then Run.
 
