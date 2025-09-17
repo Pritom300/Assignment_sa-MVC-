@@ -2,7 +2,7 @@ Assignment_Sa (SA Tech & Consultancy) <br />
 
 Project Overview <br />
 
-This is a simple ASP.NET Core with MVC pattern application to manage sales transactions with master-detail entries.
+This is a simple ASP.NET Core (.NET 9) with MVC pattern application to manage sales transactions with master-detail entries.
 The project includes authentication, dynamic product entry by selected customer, Excel and PDF exports, validations, stock deduction, global error handling and role-based access.
 
 Database seeding with: <br />
